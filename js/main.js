@@ -2,7 +2,16 @@
 
 $(document).ready(function(){
 
-  faceapi.nets.ssdMobilenetv1.loadFromUri('models')
+  faceapi.nets.ssdMobilenetv1.loadFromUri('models');
+
+  if('serviceWorlder' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => {
+          console.log('registration: ', reg);
+        });
+    });
+  }
 
 
   $('#file-input').on('change', async function() {
